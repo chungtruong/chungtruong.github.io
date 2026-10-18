@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!--
+  BẢN NHÁP — người dùng tự rà soát trước khi công bố.
+  v3 (2026-10-18, app 1.1.0): placeholder đã điền theo trang đang host (C.T Studio, Vietnam,
+  derekcheung1983@gmail.com, effective date 2026-10-18 — đổi nếu upload ngày khác).
+  Nội dung giống docs/privacy-policy.md (v3). Sửa ở một bên thì sửa cả bên kia.
+  Khi upload lên GitHub Pages: đặt tên file là privacy.html trong thư mục chillballsort/ (xem docs/play-console-app-content.md Phần 1).
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -31,7 +38,7 @@
 <p class="meta">
 <strong>Developer:</strong> C.T Studio ("we", "us"), an independent developer based in Vietnam<br>
 <strong>App:</strong> Chill Ball Sort: Color Puzzle (Android package <code>com.ctstudio.chillballsort</code>) ("the App")<br>
-<strong>Effective date:</strong> 2026-10-10<br>
+<strong>Effective date:</strong> 2026-10-18<br>
 <strong>Contact:</strong> <a href="mailto:derekcheung1983@gmail.com">derekcheung1983@gmail.com</a>
 </p>
 <p>This policy explains what information the App handles, why, who it is shared with, and the choices you have.</p>
@@ -44,15 +51,18 @@
 <li>For users in the European Economic Area (EEA), the United Kingdom and Switzerland (and where otherwise required by law), the App asks for <strong>consent</strong> through Google's User Messaging Platform before ads are requested. You can change your choice at any time in <strong>Settings → Privacy options</strong>.</li>
 <li>In-app purchases are processed by <strong>Google Play</strong>. We never see your payment details.</li>
 <li>We do <strong>not</strong> use any analytics or crash-reporting tools of our own.</li>
+<li>The optional <strong>Daily reminder</strong> is a notification created <strong>on your device</strong>. We do not use push servers.</li>
 </ul>
 
 <h2>2. Information stored only on your device</h2>
-<p>The App saves the following data <strong>locally on your device</strong> so you can continue playing: level progress and best results, the current puzzle (including undo history), Daily Puzzle streak, booster/hint counters, ad frequency counters (for example how many ads were shown today, used only to limit ads), settings (sound, music, vibration, colorblind symbols, language, theme), and whether you own "Remove Ads". Google's consent tool also stores your privacy choices on your device.</p>
+<p>The App saves the following data <strong>locally on your device</strong> so you can continue playing: level progress and best results, the current puzzle (including undo history), Daily Puzzle streak and which recent Daily Puzzles you completed (Daily calendar), booster/hint counters, ad frequency counters (for example how many ads were shown today, used only to limit ads), total play time and whether the rating prompt has already been shown (used only to decide when to show it), settings (sound, music, vibration, colorblind symbols, language, theme, Daily reminder on/off), and whether you own "Remove Ads". Google's consent tool also stores your privacy choices on your device.</p>
 <p>This data is <strong>not sent to us</strong>. It is deleted when you uninstall the App or clear its data in Android settings. The App does not back it up to the cloud.</p>
+<p><strong>Daily reminder (optional).</strong> If you turn it on, the App schedules one local notification around 7 PM on days you have not yet played the Daily Puzzle. The reminder is scheduled and shown entirely on your device using Android's background-task system (WorkManager); no data is sent to us or to a notification server. On Android 13 and later, Android asks for your permission to show notifications. You can turn the reminder off at any time in <strong>Settings → Daily reminder (7 PM)</strong> or in Android's notification settings.</p>
 
 <h2>3. Information we receive directly</h2>
 <p>We do not collect personal information through the App. If you email us, we receive your email address and your message. We use them only to reply to you and delete them when they are no longer needed.</p>
 <p>Google Play may give us <strong>aggregated statistics</strong> about the App (such as number of installs, ratings, and crash and performance reports from users who have agreed to share diagnostics with Google). This information is provided by Google under its own policies and does not identify you to us.</p>
+<p><strong>Ratings and reviews.</strong> The App may occasionally show Google Play's rating card (Google Play In-App Review), and <strong>Settings → Rate the game</strong> opens the App's Play Store page. The rating card is displayed by the Google Play Store app, not by us. If you choose to leave a rating or review, it is sent to Google Play and published on the Play Store like any other review, under Google's policies. The App does not receive your rating or review text and cannot tell whether you left one. You can edit or delete your review in the Google Play Store.</p>
 
 <h2>4. Advertising — Google AdMob</h2>
 <p>The App uses the <strong>Google Mobile Ads SDK (AdMob)</strong>, provided by Google LLC (or Google Ireland Limited for users in the EEA, UK and Switzerland), to show full-screen ads between levels and optional rewarded video ads (for example to get an extra tube or a hint). There are no banner ads.</p>
@@ -99,7 +109,9 @@
 <tr><td>Google Play Billing (<code>com.android.vending.BILLING</code>)</td><td>In-app purchases</td></tr>
 <tr><td>Vibration (<code>VIBRATE</code>)</td><td>Optional haptic feedback (can be turned off in Settings)</td></tr>
 <tr><td>Basic phone state (<code>READ_BASIC_PHONE_STATE</code>)</td><td>Declared by the Google Mobile Ads SDK. A non-dangerous permission that lets the SDK read basic information such as the mobile network type. It does <strong>not</strong> give access to your phone number, calls, messages or contacts, and no permission prompt is shown</td></tr>
-<tr><td>Wake lock / background tasks (<code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code>)</td><td>Declared by Google's background-task library (used by the ads SDK) to schedule small tasks, such as sending ad-related data, reliably. The App itself does not run background services for its own features</td></tr>
+<tr><td>Notifications (<code>POST_NOTIFICATIONS</code>)</td><td>Show the optional Daily reminder (section 2). On Android 13 and later you are asked first; you can refuse or turn it off later</td></tr>
+<tr><td>Run at startup (<code>RECEIVE_BOOT_COMPLETED</code>)</td><td>Re-schedule the Daily reminder after your device restarts. A normal permission with no prompt; it does not read any of your data</td></tr>
+<tr><td>Wake lock / background tasks (<code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code>)</td><td>Declared by Google's background-task library (WorkManager), which the ads SDK uses to run small tasks such as sending ad-related data, and which the App uses only to schedule the optional Daily reminder. The App does not run any other background service for its own features</td></tr>
 </table>
 <p>The App does <strong>not</strong> request location, camera, microphone, contacts, phone calls, SMS or storage permissions.</p>
 
@@ -141,7 +153,7 @@
 <p class="meta">
 <strong>Nhà phát triển:</strong> C.T Studio ("chúng tôi"), nhà phát triển độc lập tại Việt Nam<br>
 <strong>Ứng dụng:</strong> Chill Ball Sort: Color Puzzle (gói Android <code>com.ctstudio.chillballsort</code>) ("Ứng dụng")<br>
-<strong>Ngày hiệu lực:</strong> 2026-10-10<br>
+<strong>Ngày hiệu lực:</strong> 2026-10-18<br>
 <strong>Liên hệ:</strong> <a href="mailto:derekcheung1983@gmail.com">derekcheung1983@gmail.com</a>
 </p>
 <p>Chính sách này giải thích Ứng dụng xử lý thông tin gì, vì sao, chia sẻ với ai và bạn có những lựa chọn nào. Nếu bản tiếng Việt và bản tiếng Anh khác nhau, bản tiếng Anh được ưu tiên.</p>
@@ -154,15 +166,18 @@
 <li>Với người dùng ở Khu vực Kinh tế châu Âu (EEA), Vương quốc Anh và Thụy Sĩ (và nơi luật yêu cầu), Ứng dụng xin <strong>sự đồng ý</strong> qua công cụ User Messaging Platform của Google trước khi yêu cầu quảng cáo. Bạn có thể đổi lựa chọn bất cứ lúc nào trong <strong>Cài đặt → Tùy chọn quyền riêng tư</strong>.</li>
 <li>Mua trong ứng dụng do <strong>Google Play</strong> xử lý. Chúng tôi không bao giờ thấy thông tin thanh toán của bạn.</li>
 <li>Chúng tôi <strong>không</strong> dùng công cụ phân tích (analytics) hay báo lỗi (crash reporting) riêng nào.</li>
+<li><strong>Nhắc Daily</strong> (tùy chọn) là thông báo được tạo <strong>ngay trên thiết bị</strong>. Chúng tôi không dùng máy chủ gửi thông báo đẩy (push).</li>
 </ul>
 
 <h2>2. Thông tin chỉ lưu trên thiết bị</h2>
-<p>Ứng dụng lưu <strong>cục bộ trên thiết bị</strong> các dữ liệu sau để bạn chơi tiếp: tiến độ màn chơi và kết quả tốt nhất, màn đang chơi dở (gồm lịch sử hoàn tác), chuỗi ngày Thử thách mỗi ngày, bộ đếm trợ giúp/gợi ý, bộ đếm tần suất quảng cáo (ví dụ số quảng cáo đã hiện hôm nay, chỉ dùng để giới hạn quảng cáo), cài đặt (âm thanh, nhạc, rung, ký hiệu cho người mù màu, ngôn ngữ, theme) và việc bạn đã mua "Xóa quảng cáo" hay chưa. Công cụ xin đồng ý của Google cũng lưu lựa chọn quyền riêng tư của bạn trên thiết bị.</p>
+<p>Ứng dụng lưu <strong>cục bộ trên thiết bị</strong> các dữ liệu sau để bạn chơi tiếp: tiến độ màn chơi và kết quả tốt nhất, màn đang chơi dở (gồm lịch sử hoàn tác), chuỗi ngày Thử thách mỗi ngày và các ngày Daily gần đây bạn đã hoàn thành (Lịch Daily), bộ đếm trợ giúp/gợi ý, bộ đếm tần suất quảng cáo (ví dụ số quảng cáo đã hiện hôm nay, chỉ dùng để giới hạn quảng cáo), tổng thời gian chơi và việc đã hiện lời mời đánh giá hay chưa (chỉ dùng để quyết định khi nào hiện), cài đặt (âm thanh, nhạc, rung, ký hiệu cho người mù màu, ngôn ngữ, theme, bật/tắt nhắc Daily) và việc bạn đã mua "Xóa quảng cáo" hay chưa. Công cụ xin đồng ý của Google cũng lưu lựa chọn quyền riêng tư của bạn trên thiết bị.</p>
 <p>Dữ liệu này <strong>không gửi về cho chúng tôi</strong>. Dữ liệu bị xóa khi bạn gỡ Ứng dụng hoặc xóa dữ liệu ứng dụng trong cài đặt Android. Ứng dụng không sao lưu dữ liệu lên đám mây.</p>
+<p><strong>Nhắc Daily (tùy chọn).</strong> Nếu bạn bật, Ứng dụng đặt một thông báo cục bộ vào khoảng 19:00 những ngày bạn chưa chơi Daily. Thông báo được lên lịch và hiển thị hoàn toàn trên thiết bị bằng hệ thống tác vụ nền của Android (WorkManager); không có dữ liệu nào gửi cho chúng tôi hay tới máy chủ thông báo. Từ Android 13, Android sẽ hỏi bạn có cho phép hiện thông báo không. Bạn tắt nhắc bất cứ lúc nào trong <strong>Cài đặt → Nhắc Daily (19:00)</strong> hoặc trong cài đặt thông báo của Android.</p>
 
 <h2>3. Thông tin chúng tôi nhận trực tiếp</h2>
 <p>Chúng tôi không thu thập thông tin cá nhân qua Ứng dụng. Nếu bạn gửi email cho chúng tôi, chúng tôi nhận địa chỉ email và nội dung thư; chỉ dùng để trả lời bạn và xóa khi không còn cần.</p>
 <p>Google Play có thể cung cấp cho chúng tôi <strong>số liệu thống kê tổng hợp</strong> về Ứng dụng (số lượt cài, đánh giá, báo cáo lỗi và hiệu năng từ người dùng đã đồng ý chia sẻ dữ liệu chẩn đoán với Google). Thông tin này do Google cung cấp theo chính sách của Google và không cho chúng tôi biết bạn là ai.</p>
+<p><strong>Đánh giá và nhận xét.</strong> Thỉnh thoảng Ứng dụng có thể hiện thẻ đánh giá của Google Play (Google Play In-App Review), và <strong>Cài đặt → Đánh giá game</strong> mở trang Ứng dụng trên Play Store. Thẻ đánh giá do ứng dụng Google Play Store hiển thị, không phải do chúng tôi. Nếu bạn chọn chấm sao hoặc viết nhận xét, nội dung đó được gửi tới Google Play và đăng công khai trên Play Store như mọi đánh giá khác, theo chính sách của Google. Ứng dụng không nhận được số sao hay nội dung nhận xét và không biết bạn có đánh giá hay không. Bạn có thể sửa hoặc xóa đánh giá trong Google Play Store.</p>
 
 <h2>4. Quảng cáo — Google AdMob</h2>
 <p>Ứng dụng dùng <strong>Google Mobile Ads SDK (AdMob)</strong> do Google LLC cung cấp (Google Ireland Limited đối với người dùng ở EEA, Anh và Thụy Sĩ) để hiển thị quảng cáo toàn màn hình giữa các màn và quảng cáo video có thưởng do bạn tự chọn xem (ví dụ để thêm một ống hoặc lấy gợi ý). Không có quảng cáo banner.</p>
@@ -209,7 +224,9 @@
 <tr><td>Google Play Billing (<code>com.android.vending.BILLING</code>)</td><td>Mua trong ứng dụng</td></tr>
 <tr><td>Rung (<code>VIBRATE</code>)</td><td>Phản hồi rung tùy chọn (tắt được trong Cài đặt)</td></tr>
 <tr><td>Trạng thái điện thoại cơ bản (<code>READ_BASIC_PHONE_STATE</code>)</td><td>Do Google Mobile Ads SDK khai báo. Quyền không nguy hiểm, cho SDK đọc thông tin cơ bản như loại mạng di động. Quyền này <strong>không</strong> cho truy cập số điện thoại, cuộc gọi, tin nhắn hay danh bạ, và không hiện hộp thoại xin quyền</td></tr>
-<tr><td>Giữ thiết bị thức / tác vụ nền (<code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code>)</td><td>Do thư viện tác vụ nền của Google (SDK quảng cáo dùng) khai báo để chạy ổn định các tác vụ nhỏ như gửi dữ liệu liên quan quảng cáo. Bản thân Ứng dụng không chạy dịch vụ nền cho tính năng của mình</td></tr>
+<tr><td>Thông báo (<code>POST_NOTIFICATIONS</code>)</td><td>Hiện nhắc Daily tùy chọn (mục 2). Từ Android 13 bạn được hỏi trước; có thể từ chối hoặc tắt sau</td></tr>
+<tr><td>Chạy khi khởi động máy (<code>RECEIVE_BOOT_COMPLETED</code>)</td><td>Đặt lại lịch nhắc Daily sau khi thiết bị khởi động lại. Quyền thường, không hiện hộp thoại, không đọc dữ liệu nào của bạn</td></tr>
+<tr><td>Giữ thiết bị thức / tác vụ nền (<code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code>)</td><td>Do thư viện tác vụ nền của Google (WorkManager) khai báo. SDK quảng cáo dùng nó để chạy các tác vụ nhỏ như gửi dữ liệu liên quan quảng cáo; Ứng dụng chỉ dùng nó để lên lịch nhắc Daily tùy chọn. Ứng dụng không chạy dịch vụ nền nào khác cho tính năng của mình</td></tr>
 </table>
 <p>Ứng dụng <strong>không</strong> xin quyền vị trí, máy ảnh, micro, danh bạ, cuộc gọi, SMS hay bộ nhớ.</p>
 
